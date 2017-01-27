@@ -11,6 +11,7 @@ public class HibernateUtil {
 		SessionFactory sf= new Configuration().configure().buildSessionFactory();
 		
 		Session sesion = sf.openSession();
+		
 		return sesion;
 		
 		

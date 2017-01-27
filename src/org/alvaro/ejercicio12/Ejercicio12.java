@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 /**
  * Servlet implementation class Ejercicio12
@@ -24,7 +25,7 @@ public class Ejercicio12 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("view/libro/libroCrear.jsp").forward(
+		request.getRequestDispatcher("/view/libro/libroCrear.jsp").forward(
 				request, response);
 
 	}
@@ -35,13 +36,13 @@ public class Ejercicio12 extends HttpServlet {
 		String titulo = request.getParameter("titulo");
 		String categoria = request.getParameter("categoria");
 
-		insertarLibro(isbn, categoria, titulo);
+		insertarLibro(isbn, titulo, categoria);
 
 		List<Libro> libros = listarLibros();
 		
 		request.setAttribute("libros", libros);
 		
-		request.getRequestDispatcher("view/libro/libroListar.jsp").forward(
+		request.getRequestDispatcher("/view/libro/libroListar.jsp").forward(
 				request, response);
 
 	}
@@ -50,12 +51,13 @@ public class Ejercicio12 extends HttpServlet {
 		
 		Session ses = getSession();
 		
-		 List <Libro> libros=ses.createQuery("from libro").list();
+		
+		 List <Libro> libros=ses.createQuery("from Libro").list();
 		
 		return libros ;
 	}
 
-	private void insertarLibro(int isbn, String categoria, String titulo) {
+	private void insertarLibro(int isbn, String titulo, String categoria) {
 		
 		//recuperamos la sesion
 		Session ses = getSession();
@@ -64,7 +66,7 @@ public class Ejercicio12 extends HttpServlet {
 		Transaction tr = ses.beginTransaction();
 
 		//creamos el pojo nuevo
-		Libro l = new Libro(isbn, categoria, titulo);
+		Libro l = new Libro(isbn, titulo, categoria);
 		
 		//guardamos y hacemos commit
 		
