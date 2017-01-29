@@ -38,8 +38,7 @@ private List<Libro> listarLibros() {
 		
 		 List <Libro> libros=ses.createQuery("from Libro").list();
 		 ses.close();
-		
-		return libros ;
+			return libros ;
 	}
 
 	protected void doPost(HttpServletRequest request,
