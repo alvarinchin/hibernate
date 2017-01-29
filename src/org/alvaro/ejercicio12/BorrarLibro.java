@@ -20,13 +20,15 @@ public class BorrarLibro extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		long id = Long.parseLong(request.getPathInfo().substring(1, request.getPathInfo().length()));
-
+		
+		
+		long id = Long.parseLong(request.getPathInfo().toString().substring(1, request.getPathInfo().length()));
+		
 		BorrarDeLaBase(id);
 		
 	 request.setAttribute("libros", listarLibros());
 
-		request.getRequestDispatcher("PruebasHibernate/Ejercicio12").forward(request, response);
+		request.getRequestDispatcher("/view/libro/libroListar.jsp").forward(request, response);
 
 	}
 
@@ -35,6 +37,7 @@ public class BorrarLibro extends HttpServlet {
 		Session ses = getSession();
 
 		List<Libro> libros = ses.createQuery("from Libro").list();
+		ses.close();
 
 		return libros;
 	}
@@ -43,6 +46,11 @@ public class BorrarLibro extends HttpServlet {
 		Session s = getSession();
 
 	Transaction t = s.beginTransaction();
+	
+	Libro l= (Libro) s.load(Libro.class, id);
+	s.delete(l);
+	t.commit();
+	s.close();
 	//TODO
 	}
 

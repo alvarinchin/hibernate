@@ -16,8 +16,11 @@
 				<td>${libro.titulo}</td>
 				<td>${libro.categoria}</td>
 				<td><a href="http://localhost:8080/PruebasHibernate/BorrarLibro/${libro.id}">Borrar</a></td>
+				<td><a href="http://localhost:8080/PruebasHibernate/EditarLibro/${libro.id}">Editar</a></td>
 			</tr>
 		</c:forEach>
-
+		
 	</table>
+					<td><a href="http://localhost:8080/PruebasHibernate/Ejercicio12">Crear</a></td>
+	
 </body>

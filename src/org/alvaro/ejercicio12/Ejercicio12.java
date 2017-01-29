@@ -38,24 +38,14 @@ public class Ejercicio12 extends HttpServlet {
 
 		insertarLibro(isbn, titulo, categoria);
 
-		List<Libro> libros = listarLibros();
 		
-		request.setAttribute("libros", libros);
 		
-		request.getRequestDispatcher("/view/libro/libroListar.jsp").forward(
+		request.getRequestDispatcher("http://localhost:8080/PruebasHibernate/LibroListar").forward(
 				request, response);
 
 	}
 
-	private List<Libro> listarLibros() {
-		
-		Session ses = getSession();
-		
-		
-		 List <Libro> libros=ses.createQuery("from Libro").list();
-		
-		return libros ;
-	}
+	
 
 	private void insertarLibro(int isbn, String titulo, String categoria) {
 		

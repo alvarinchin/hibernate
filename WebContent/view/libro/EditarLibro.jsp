@@ -5,13 +5,14 @@
 <body>
 <form method="post">
 <label for="isbn">ISBN</label>
-<input id="isbn" type="text" name="isbn"><br>
+<input id="isbn" type="text" name="isbn" value="${libro.isbn}"><br>
 
 <label for="tit">Título</label>
-<input id="tit" type="text" name="titulo"><br>
+<input id="tit" type="text" name="titulo" value="${libro.titulo}"><br>
 
 <label for="cat">Categoría</label>
-<input id="cat" type="text" name="categoria"><br>
+<input id="cat" type="text" name="categoria" value="${libro.categoria}"><br>
+<input type="hidden" name="id" value="${libro.id}">
 
 <input type="submit" value="Enviar">
 </form>
