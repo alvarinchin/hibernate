@@ -36,26 +36,28 @@ public class EditarLibro extends HttpServlet {
 		int isbn = Integer.parseInt(request.getParameter("isbn"));
 		String titulo = request.getParameter("titulo");
 		String categoria = request.getParameter("categoria");
-		long id= Long.parseLong(request.getParameter("id"));
+		//Long id = new Long(request.getParameter("id"));
+		long id = Long.parseLong(request.getParameter("id"));
 		
 		actualizarLibro(isbn,titulo,categoria,id);
 		
-		request.getRequestDispatcher("EjerciciosHibernate/LibroListar").forward(request, response);
+		request.getRequestDispatcher("/LibroListar").forward(request, response);
 		
 		
 		
 		
 	}
 	
-	private void actualizarLibro(int isbn, String titulo, String categoria,long id) {
+	private void actualizarLibro(int isbn, String titulo, String categoria, Long id) {
 		Session s= getSession();
-		Transaction t = s.beginTransaction();
 		Libro l = s.load(Libro.class, id);
+
+		Transaction t = s.beginTransaction();
 		l.setIsbn(isbn);
 		l.setTitulo(titulo);
 		l.setCategoria(categoria);
 		
-		s.merge(l);
+		s.save(l);
 		t.commit();
 		s.close();
 	}
